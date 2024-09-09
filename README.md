@@ -51,7 +51,3 @@ A simple Flask application to send messages to a Telegram channel via a web inte
 │   └── style.css         # Styles
 ├── requirements.txt      # Dependencies
 └── README.md             # Project documentation
-
-
-## **License**
-    MIT License
