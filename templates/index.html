@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Message to Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        form {
+            display: flex;
+            align-items:start;
+            justify-content: space-between;
+        }
+        .input-box{
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea {
+            font-size: 1.5rem;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder, textarea::placeholder {
+            font-size: 1.5rem;
+        }
+
+        input[type="text"], textarea {
+            height: 3rem;
+        }
+        button {
+            padding: 10px 15px;
+            border: 1px solid black;
+            border-radius: 18px;
+            background-color: transparent;
+            color: black;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+             background-color: black;
+             color: white;
+             border-color: black;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для придания объема */
+        }
+    </style>
+</head>
+<body>
+<form id="messageForm">
+    <div class="input-box">
+        <input placeholder="Title" type="text" id="title" name="title" required>
+        <textarea placeholder="Description..." id="description" name="description" rows="4" cols="30" required></textarea>
+    </div>
+    <button type="submit">Publish</button>
+</form>
+
+<script>
+    document.getElementById('messageForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+
+        fetch('/send-message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: title, description: description }) // Send title and description separately
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.status);
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>
