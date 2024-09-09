@@ -2,8 +2,14 @@ import requests
 from telegram import Update
 from telegram.ext import CommandHandler, MessageHandler, CallbackContext, Application, filters
 
-TELEGRAM_BOT_TOKEN = '7325115939:AAHSS23Nev_PueQMOSSYv0YWoZQbroqMEuI'  # Replace with your actual token
-chat_id = '@amirsoftwaretest'  # Replace with your numeric chat ID
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
 
 async def start_command(update: Update, context: CallbackContext):
     await update.message.reply_text('Привет! Я бот для отправки сообщений в ваш канал.')

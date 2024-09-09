@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify, render_template
 import requests
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 app = Flask(__name__)
 
-TELEGRAM_BOT_TOKEN = '7325115939:AAHSS23Nev_PueQMOSSYv0YWoZQbroqMEuI'
-CHAT_ID = '@amirsoftwaretest'
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
+
 
 @app.route('/')
 def index():
